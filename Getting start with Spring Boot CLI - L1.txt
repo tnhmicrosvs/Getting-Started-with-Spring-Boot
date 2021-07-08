@@ -1,0 +1,118 @@
+Lets get started with Spring Boot
+---------------------------------
+
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started.installing
+
+ Before you begin, you should check your current Java installation by using the following command:
+
+C:\Users\USER>java -version
+java version "13.0.2" 2020-01-14
+Java(TM) SE Runtime Environment (build 13.0.2+8)
+Java HotSpot(TM) 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
+
+
+it is possible to use chocolatey or scoop package managers to install Sprinboot CLI.
+let's use scoop
+
+Installing the Spring Boot CLI
+------------------------------
+
+PS C:\Users\USER> Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+
+Execution Policy Change
+The execution policy helps protect you from scripts that you do not trust. Changing the execution policy might expose
+you to the security risks described in the about_Execution_Policies help topic at
+https:/go.microsoft.com/fwlink/?LinkID=135170. Do you want to change the execution policy?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"): Y
+
+downoload and install scoop with power shell invoke-expression
+
+PS C:\Users\USER> iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+Initializing...
+Downloading scoop...
+Extracting...
+Creating shim...
+Downloading main bucket...
+Extracting...
+Adding ~\scoop\shims to your path.
+'lastupdate' has been set to '2021-07-07T17:21:33.5238835+05:30'
+Scoop was installed successfully!
+Type 'scoop help' for instructions.
+
+
+PS C:\Users\USER> scoop
+Usage: scoop <command> [<args>]
+
+install spring boot CLI
+-----------------------
+
+PS C:\Users\USER> scoop install springboot
+Couldn't find manifest for 'springboot'.
+
+PS C:\Users\USER> scoop install springboot
+Couldn't find manifest for 'springboot'.
+
+PS C:\Users\USER> scoop update
+Updating Scoop...
+Updating 'main' bucket...
+Checking repo... ok
+The main bucket was added successfully.
+Scoop was updated successfully!
+
+PS C:\Users\USER> scoop install springboot
+Couldn't find manifest for 'springboot'.
+
+
+PS C:\Users\USER> scoop bucket list
+main
+
+PS C:\Users\USER> scoop bucket add extras
+Checking repo... ok
+The extras bucket was added successfully.
+
+PS C:\Users\USER> scoop install springboot
+Installing 'springboot' (2.3.12) [64bit]
+spring-boot-cli-2.3.12.RELEASE-bin.zip (11.1 MB) [============================================================] 100%
+Checking hash of spring-boot-cli-2.3.12.RELEASE-bin.zip ... ok.
+Extracting spring-boot-cli-2.3.12.RELEASE-bin.zip ... done.
+Linking ~\scoop\apps\springboot\current => ~\scoop\apps\springboot\2.3.12
+Creating shim for 'spring'.
+'springboot' (2.3.12) was installed successfully!
+'springboot' suggests installing 'java/oraclejdk' or 'java/openjdk'.
+
+PS C:\Users\USER> spring
+usage: spring [--help] [--version]
+       <command> [<args>]
+
+create a basic application with groovy alnguage syntax
+------------------------------------------------------
+
+PS C:\Users\USER>  notepad app.groovy
+
+include the below code
+----------------------
+
+@RestController
+class ThisWillActuallyRun {
+
+    @RequestMapping("/")
+    String home() {
+        "Hello World!"
+    }
+}
+
+run the app
+-----------
+
+PS C:\Users\USER> spring run app.groovy
+
+Access it with browser 
+----------------------
+
+localhost:8080 
+
+
+
+
+
+
