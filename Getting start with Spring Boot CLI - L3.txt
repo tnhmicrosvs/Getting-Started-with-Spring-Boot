@@ -1,0 +1,160 @@
+Lets Remove spring-cli which was installed with scoop and reinstalled with chocolatey
+-------------------------------------------------------------------------------------
+
+Remove from Scoop
+-----------------
+
+PS D:\Spring-boot\src\main\java> scoop uninstall springboot
+Uninstalling 'springboot' (2.3.12).
+Removing shim for 'spring'.
+Unlinking ~\scoop\apps\springboot\current
+'springboot' was uninstalled.
+
+
+Install from Chocolatey
+-----------------------
+
+
+PS D:\Spring-boot\src\main\java> choco install spring-boot-cli
+Chocolatey v0.10.15
+Installing the following packages:
+spring-boot-cli
+By installing you accept licenses for the packages.
+Progress: Downloading jdk8 8.0.211... 100%
+Progress: Downloading spring-boot-cli 2.2.4... 100%
+
+jdk8 v8.0.211 [Approved]
+jdk8 package files install completed. Performing other installation steps.
+The package jdk8 wants to run 'chocolateyInstall.ps1'.
+Note: If you don't run this script, the installation will fail.
+Note: To confirm automatically next time, use '-y' or consider:
+choco feature enable -n allowGlobalConfirmation
+Do you want to run the script?([Y]es/[A]ll - yes to all/[N]o/[P]rint): A
+
+Downloading JDK from https://javadl.oracle.com/webapps/download/GetFile/1.8.0_211-b12/478a62b7d4e34b78b671c754eaaf38ab/windows-i586/jdk-8u211-windows-x64.exe
+Installing jdk8...
+jdk8 has been installed.
+PATH environment variable does not have C:\Program Files\Java\jdk1.8.0_211\bin in it. Adding...
+  jdk8 may be able to be automatically uninstalled.
+Environment Vars (like PATH) have changed. Close/reopen your shell to
+ see the changes (or in powershell/cmd.exe just type `refreshenv`).
+ The install of jdk8 was successful.
+  Software installed to 'C:\Program Files\Java\jdk1.8.0_211\'
+
+spring-boot-cli v2.2.4 [Approved]
+spring-boot-cli package files install completed. Performing other installation steps.
+Added C:\ProgramData\chocolatey\bin\spring.exe shim pointed to '..\lib\spring-boot-cli\spring-2.2.4.release\bin\spring.bat'.
+Environment Vars (like PATH) have changed. Close/reopen your shell to
+ see the changes (or in powershell/cmd.exe just type `refreshenv`).
+ The install of spring-boot-cli was successful.
+  Software install location not explicitly set, could be in package or
+  default install location if installer.
+
+Chocolatey installed 2/2 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+
+Veryfy the instalation
+----------------------
+
+
+PS D:\Spring-boot\src\main\java> spring
+usage: spring [--help] [--version]
+       <command> [<args>]
+
+
+
+Take look at the pom.xml which is created in lesson 02
+------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
+    </parent>
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+    <!-- Additional lines to be added here... -->
+
+</project>
+
+
+Lets build the application
+--------------------------
+
+To finish our application, we need to create a single Java file. By default, Maven compiles sources from src/main/java,
+ so you need to create that directory structure and then add a file named src/main/java/MyApplication.java 
+to contain the following code:
+
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@EnableAutoConfiguration
+public class MyApplication {
+
+    @RequestMapping("/")
+    String home() {
+        return "Hello World!";
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+
+}
+
+Running the Example
+-------------------
+
+PS D:\Spring-boot> ls                                                                                                   
+
+    Directory: D:\Spring-boot
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         7/9/2021   4:13 PM                src
+d-----         7/9/2021   3:43 PM                target
+-a----         7/7/2021   6:18 PM           3302 getting start with spring.txt
+-a----         7/9/2021   5:01 PM            834 pom.xml
+-a----         7/7/2021   4:48 PM       13894636 spring-boot-cli-2.5.2-bin.zip
+
+
+PS D:\Spring-boot> cd .\src\main\java\    
+PS D:\Spring-boot\src\main\java> ls                                                                                     
+
+    Directory: D:\Spring-boot\src\main\java
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----         7/9/2021   4:59 PM            538 MyApplication1.java
+
+
+PS D:\Spring-boot\src\main\java> mvn spring-boot:run    
+
+
+
+
+
+
+
+
+
+
