@@ -1,0 +1,99 @@
+As we have used Scoop for Spring CLI lets use chocolatey
+
+Chocolatey Install:
+-------------------
+Ref :
+https://chocolatey.org/install
+
+
+PS C:\Windows\system32>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+ Type choco  to veryfy the installation
+
+
+PS C:\Windows\system32> choco
+Chocolatey v0.10.15
+Please run 'choco -?' or 'choco <command> -?' for help menu.
+PS C:\Windows\system32>
+
+
+Maven Install
+-------------
+
+PS C:\Windows\system32> choco install maven
+Chocolatey v0.10.15
+Installing the following packages:
+maven
+By installing you accept licenses for the packages.
+Progress: Downloading maven 3.8.1... 100%
+
+
+open a new power shell window and try
+
+PS C:\Windows\system32> mvn -v
+Apache Maven 3.8.1 (05c21c65bdfed0f71a2f2ada8b84da59348c4c5d)
+Maven home: C:\ProgramData\chocolatey\lib\maven\apache-maven-3.8.1\bin\..
+Java version: 13.0.2, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-13.0.2
+Default locale: en_US, platform encoding: Cp1252
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
+
+
+lets create a basic maven project
+---------------------------------
+ref : 
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started.installing.cli
+
+
+create the below pom.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
+    </parent>
+
+    <!-- Additional lines to be added here... -->
+
+</project>
+
+check the current dependancy arrangement as  we have spring-boot-starter-parent.
+The spring-boot-starter-parent is a special starter that provides useful Maven defaults.
+
+
+$ mvn dependency:tree
+
+The mvn dependency:tree command prints a tree representation of your project dependencies
+
+
+Add the spring-boot-starter-web dependency immediately below the parent section:
+--------------------------------------------------------------------------------
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+
+
+Now check the mvn dependency:tree again
+---------------------------------------
+
+mvn dependency:tree
+
+
+
+
+
+
+
+
