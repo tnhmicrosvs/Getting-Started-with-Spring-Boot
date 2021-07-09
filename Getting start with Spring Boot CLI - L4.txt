@@ -1,0 +1,54 @@
+Creating an Executable Jar
+-------------------------
+
+creating a completely self-contained executable jar file that we could 
+run in production. Executable jars (sometimes called “fat jars”) are 
+archives containing your compiled classes along with all of the jar
+dependencies that your code needs to run.
+
+
+Java does not provide a standard way to load nested jar files
+(jar files that are themselves contained within a jar). 
+This can be problematic if you are looking to distribute a 
+self-contained application.
+
+as a solution many developers use “uber” jars.
+ An uber jar packages all the classes from all the application’s 
+dependencies into a single archive. The problem with this approach 
+is that it becomes hard to see which libraries are in your application.
+ It can also be problematic if the same filename is used 
+(but with different content) in multiple jars.
+
+Spring Boot takes a different approach and lets you actually nest jars directly.
+
+
+To create an executable jar, we need to add the spring-boot-maven-plugin 
+to our pom.xml.  insert the following lines just below the dependencies section:
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+
+
+Run the mvn as follows
+----------------------
+
+PS D:\Spring-boot> mvn package
+
+
+You can use jar tvf  command to look into the .jar which is in the target
+folder
+
+PS D:\Spring-boot\target> jar tvf myproject-0.0.1-SNAPSHOT.jar
+
+Run the java app also 
+---------------------
+
+PS D:\Spring-boot\target> java -jar .\myproject-0.0.1-SNAPSHOT.jar
+
+
